@@ -1,17 +1,33 @@
 import main from "../assets/images/main.svg";
+import Wrapper from "../assets/wrappers/LandingPage";
 import { Logo } from "../components";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
-    <div>
+    <Wrapper>
       <nav>
         <Logo />
       </nav>
-      <main>
-        <h4>Landing</h4>
-        <img src={main} alt="main" />
-      </main>
-    </div>
+      <div className="container page">
+        {/* info */}
+        <div className="info">
+          <h1>
+            job <span>tracking</span> app
+          </h1>
+          <p>
+            I'm baby wayfarers hoodie next level taiyaki brooklyn cliche blue
+            bottle single-origin coffee chia. Aesthetic post-ironic venmo,
+            quinoa lo-fi tote bag adaptogen everyday carry meggings +1 brunch
+            narwhal.
+          </p>
+          <Link to="/register" className="btn btn-hero">
+            Login / Register
+          </Link>
+        </div>
+        <img src={main} alt="job hunt" className="img main-img" />
+      </div>
+    </Wrapper>
   );
 };
 
