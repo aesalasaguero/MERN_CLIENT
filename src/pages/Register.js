@@ -4,6 +4,8 @@ import Wrapper from "../assets/wrappers/RegisterPage";
 
 import { useAppContext } from "../context/appContext";
 
+import { useNavigate } from "react-router-dom";
+
 // global context and useNavigate later
 
 const initialState = {
@@ -16,9 +18,14 @@ const initialState = {
 // global state
 
 function Register() {
+  const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
+  const { isLoading, showAlert, displayAlert, registerUser, user } =
+    useAppContext();
 
-  const { isLoading, showAlert, displayAlert } = useAppContext();
+  const toggleMember = () => {
+    setValues({ ...values, isMember: !values.isMember });
+  };
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -32,11 +39,22 @@ function Register() {
       displayAlert();
       return;
     }
+    const currentUser = { name, email, password };
+    if (isMember) {
+      console.log("already a member");
+    } else {
+      registerUser(currentUser);
+    }
     console.log(values);
   };
-  const toggleMember = () => {
-    setValues({ ...values, isMember: !values.isMember });
-  };
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+  }, [user, navigate]);
 
   return (
     <Wrapper className="full-page">
