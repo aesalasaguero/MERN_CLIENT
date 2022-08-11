@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import Wrapper from "../assets/wrappers/Navbar";
+import { FaHome } from "react-icons/fa";
 
 const Navbar = () => {
   return (
-    <nav>
-      <Link to="/">Dashboard</Link>
-      <Link to="/register">Register</Link>
-      <Link to="/landing">Landing</Link>
-    </nav>
+    <Wrapper>
+      <h4>navbar</h4>
+      <FaHome />
+    </Wrapper>
   );
 };
 
