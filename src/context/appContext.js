@@ -12,6 +12,8 @@ import {
   SETUP_USER_BEGIN,
   SETUP_USER_SUCCESS,
   SETUP_USER_ERROR,
+  TOGGLE_SIDEBAR,
+  LOGOUT_USER,
 } from "./actions";
 
 import axios from "axios";
@@ -29,6 +31,7 @@ export const initialState = {
   token: token,
   userLocation: userLocation || "",
   jobLocation: userLocation || "",
+  showSidebar: false,
 };
 
 const AppContext = React.createContext();
@@ -53,7 +56,7 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("location", JSON.stringify(location));
   };
 
-  const removeUserToLocalStorage = ({ user, token, location }) => {
+  const removeUserToLocalStorage = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     localStorage.removeItem("location");
@@ -124,6 +127,15 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const toggleSidebar = () => {
+    dispatch({ type: TOGGLE_SIDEBAR });
+  };
+
+  const logoutUser = () => {
+    dispatch({ type: LOGOUT_USER });
+    removeUserToLocalStorage();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -132,6 +144,8 @@ const AppProvider = ({ children }) => {
         registerUser,
         loginUser,
         setupUser,
+        toggleSidebar,
+        logoutUser,
       }}
     >
       {children}
