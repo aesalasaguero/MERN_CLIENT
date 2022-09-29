@@ -40,7 +40,6 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    e.preventDefault();
     const { name, email, password, isMember } = values;
     if (!email || !password || (!isMember && !name)) {
       displayAlert();
@@ -60,7 +59,7 @@ function Register() {
         alertText: "User Created! Redirecting...",
       });
     }
-    console.log(values);
+    //console.log(values);
   };
 
   useEffect(() => {
